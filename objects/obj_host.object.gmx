@@ -25,9 +25,102 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.chunk_list=ds_list_create()
+            <string>/// Initialize
 
+// State
+state=s.idle
+
+// Variables
+chunk_list=ds_list_create()
+tick_rate=room_speed
+
+// Inits
 create_pattern_chunks()
+create_enums()
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Debug
+
+if keyboard_check_pressed(vk_space)
+{
+    show_pattern()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// GUI
+switch(state)
+{
+    case s.title:
+    {
+        //title screen code
+    }break
+    
+    case s.idle:
+    {
+        // Healthbars
+        d_fnt(fnt_healthbar)
+        d_col(c_black)
+        draw_area(20,40,580,65,c_white,c_black,3)
+        d_align(fa_left,fa_middle)
+        draw_text(20,20,'player name test')
+        
+        d_fnt(fnt_healthbar)
+        d_col(c_black)
+        draw_area(20,75,580,100,c_white,c_black,3)
+        d_align(fa_right,fa_middle)
+        draw_text(580,120,'enemy name test')
+        
+        // Options        
+        draw_area(0,500,600,600,c_white,c_black,3)
+    
+    }break
+    
+    case s.notes:
+    {
+    
+    }break
+}
 </string>
           </argument>
         </arguments>

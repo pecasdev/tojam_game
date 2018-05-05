@@ -9,11 +9,32 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\create_pattern_chunks.gml</script>
-    <script>scripts\create_pattern.gml</script>
+    <scripts name="init">
+      <script>scripts\create_enums.gml</script>
+      <script>scripts\create_pattern_chunks.gml</script>
+    </scripts>
+    <scripts name="local">
+      <script>scripts\create_pattern.gml</script>
+    </scripts>
+    <scripts name="useful">
+      <script>scripts\d_col.gml</script>
+      <script>scripts\d_fnt.gml</script>
+      <script>scripts\d_align.gml</script>
+      <script>scripts\d_alpha.gml</script>
+      <script>scripts\draw_area.gml</script>
+      <script>scripts\ds_list_append_list.gml</script>
+    </scripts>
+    <scripts name="debug">
+      <script>scripts\show_pattern.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_healthbar</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\obj_player</object>
     <object>objects\obj_host</object>
+    <object>objects\obj_enemy</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
