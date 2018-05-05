@@ -8,6 +8,8 @@
   <sprites name="sprites">
     <sprite>sprites\Black</sprite>
     <sprite>sprites\sprite1</sprite>
+    <sprite>sprites\BeginSprite</sprite>
+    <sprite>sprites\hitconnect</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -34,6 +36,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_healthbar</font>
+    <font>fonts\fnt_begin</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
@@ -41,8 +44,11 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_game_back</object>
     <object>objects\obj_tile</object>
+    <object>objects\obj_begin_button</object>
+    <object>objects\obj_connect_box</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_title</room>
     <room>rooms\rm_main</room>
   </rooms>
   <help>
