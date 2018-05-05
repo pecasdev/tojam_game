@@ -35,12 +35,29 @@ chunk_list=ds_list_create()
 tick_rate=room_speed
 show_debug_message("BAM")
 
+player_name='trap lolis are hot af'
+enemy_name='im not going to jail officer'
+
+player_hp_current=200
+player_hp_max=200
+
+enemy_hp_current=300
+enemy_hp_max=300
+
 // Inits
 create_pattern_chunks()
 create_enums()
 
 // Objects
-instance_create(280,150,obj_game_back)
+instance_create(0,0,obj_hud_options)
+instance_create(0,0,obj_hud_button_attack)
+instance_create(0,0,obj_hud_button_heal)
+instance_create(0,0,obj_hud_healthbar_player)
+instance_create(0,0,obj_hud_healthbar_enemy)
+instance_create(0,0,obj_hud_player)
+instance_create(0,0,obj_hud_enemy)
+
+//instance_create(280,150,obj_game_back)
 </string>
           </argument>
         </arguments>
@@ -69,6 +86,54 @@ if keyboard_check_pressed(vk_space)
 {
     show_pattern()
 }
+
+if keyboard_check_pressed(ord('1'))
+{
+    dmg=irandom_range(2,20)
+    player_hp_current-=dmg
+    create_healthbar_chunk('player',dmg)
+}
+
+if keyboard_check(ord('2'))
+{
+    player_hp_current+=1
+}
+
+if keyboard_check_pressed(ord('4'))
+{
+    dmg=irandom_range(2,20)
+    enemy_hp_current-=dmg
+    create_healthbar_chunk('enemy',dmg)
+}
+
+if keyboard_check(ord('5'))
+{
+    enemy_hp_current+=1
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Healthbar
+player_hp_current=clamp(player_hp_current,0,player_hp_max)
+enemy_hp_current=clamp(enemy_hp_current,0,enemy_hp_max)
 </string>
           </argument>
         </arguments>
@@ -101,22 +166,26 @@ switch(state)
     
     case s.idle:
     {
+        // Options Background
+        obj_hud_options.target_x=300
+        obj_hud_options.target_y=550
+        
+        // Buttons
+        obj_hud_button_attack.target_x=154
+        obj_hud_button_attack.target_y=550
+        obj_hud_button_heal.target_x=446
+        obj_hud_button_heal.target_y=550
+        
         // Healthbars
-        d_fnt(fnt_healthbar)
-        d_col(c_black)
-        draw_area(20,40,580,65,c_white,c_black,3)
-        d_align(fa_left,fa_middle)
-        draw_text(20,20,'player name test')
+        obj_hud_healthbar_player.state=s.top
+        obj_hud_healthbar_enemy.state=s.top        
         
-        d_fnt(fnt_healthbar)
-        d_col(c_black)
-        draw_area(20,75,580,100,c_white,c_black,3)
-        d_align(fa_right,fa_middle)
-        draw_text(580,120,'enemy name test')
-        
-        // Options        
-        draw_area(0,500,600,600,c_white,c_black,3)
-    
+        // Models
+        obj_hud_player.target_x=140
+        obj_hud_player.target_y=350
+        obj_hud_enemy.target_x=460
+        obj_hud_enemy.target_y=350
+                    
     }break
     
     case s.notes:

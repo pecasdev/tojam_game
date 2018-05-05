@@ -6,8 +6,24 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\Black</sprite>
-    <sprite>sprites\sprite1</sprite>
+    <sprites name="demo">
+      <sprite>sprites\spr_game_back</sprite>
+      <sprite>sprites\spr_tile</sprite>
+    </sprites>
+    <sprites name="hud">
+      <sprite>sprites\spr_hud_button_attack</sprite>
+      <sprite>sprites\spr_hud_button_heal</sprite>
+      <sprite>sprites\spr_hud_options</sprite>
+      <sprites name="player">
+        <sprite>sprites\spr_hud_player</sprite>
+      </sprites>
+      <sprites name="enemy">
+        <sprite>sprites\spr_hud_enemy</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="else">
+      <sprite>sprites\spr_healthbar_chunk</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -27,6 +43,7 @@
       <script>scripts\draw_area.gml</script>
       <script>scripts\ds_list_append_list.gml</script>
       <script>scripts\Name_Chooser.gml</script>
+      <script>scripts\create_healthbar_chunk.gml</script>
     </scripts>
     <scripts name="debug">
       <script>scripts\show_pattern.gml</script>
@@ -36,11 +53,24 @@
     <font>fonts\fnt_healthbar</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_player</object>
     <object>objects\obj_host</object>
-    <object>objects\obj_enemy</object>
-    <object>objects\obj_game_back</object>
-    <object>objects\obj_tile</object>
+    <objects name="demo">
+      <object>objects\obj_game_back</object>
+      <object>objects\obj_tile</object>
+    </objects>
+    <objects name="hud">
+      <object>objects\obj_hud_options</object>
+      <object>objects\obj_hud_button_attack</object>
+      <object>objects\obj_hud_button_heal</object>
+      <object>objects\obj_hud_healthbar_player</object>
+      <object>objects\obj_hud_healthbar_enemy</object>
+      <object>objects\obj_hud_player</object>
+      <object>objects\obj_hud_enemy</object>
+      <object>objects\obj_hud</object>
+    </objects>
+    <objects name="else">
+      <object>objects\obj_healthbar_chunk</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
