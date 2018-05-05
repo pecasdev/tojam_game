@@ -5,7 +5,10 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\Black</sprite>
+    <sprite>sprites\sprite1</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -23,22 +26,21 @@
       <script>scripts\d_alpha.gml</script>
       <script>scripts\draw_area.gml</script>
       <script>scripts\ds_list_append_list.gml</script>
+      <script>scripts\Name_Chooser.gml</script>
     </scripts>
     <scripts name="debug">
       <script>scripts\show_pattern.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
-<<<<<<< Updated upstream
     <font>fonts\fnt_healthbar</font>
-=======
-    <font>fonts\font0</font>
->>>>>>> Stashed changes
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_host</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_game_back</object>
+    <object>objects\obj_tile</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
