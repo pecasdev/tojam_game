@@ -20,6 +20,10 @@
       <sprites name="enemy">
         <sprite>sprites\spr_hud_enemy</sprite>
       </sprites>
+      <sprites name="notes">
+        <sprite>sprites\spr_hitbar_tile</sprite>
+        <sprite>sprites\spr_notes</sprite>
+      </sprites>
     </sprites>
     <sprites name="else">
       <sprite>sprites\spr_healthbar_chunk</sprite>
@@ -67,6 +71,11 @@
       <object>objects\obj_hud_player</object>
       <object>objects\obj_hud_enemy</object>
       <object>objects\obj_hud</object>
+      <objects name="notes">
+        <object>objects\obj_notes</object>
+        <object>objects\obj_notes_pip</object>
+        <object>objects\obj_hitbar</object>
+      </objects>
     </objects>
     <objects name="else">
       <object>objects\obj_healthbar_chunk</object>

@@ -32,8 +32,7 @@ state=s.idle
 
 // Variables
 chunk_list=ds_list_create()
-tick_rate=room_speed
-show_debug_message("BAM")
+tick_rate=40//room_speed
 
 player_name='trap lolis are hot af'
 enemy_name='im not going to jail officer'
@@ -58,6 +57,7 @@ instance_create(0,0,obj_hud_player)
 instance_create(0,0,obj_hud_enemy)
 
 //instance_create(280,150,obj_game_back)
+show_debug_overlay(true)
 </string>
           </argument>
         </arguments>
@@ -84,7 +84,7 @@ instance_create(0,0,obj_hud_enemy)
 
 if keyboard_check_pressed(vk_space)
 {
-    show_pattern()
+    instance_create(300,300,obj_notes)
 }
 
 if keyboard_check_pressed(ord('1'))
@@ -131,9 +131,11 @@ if keyboard_check(ord('5'))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Healthbar
+            <string>/// Clamping
 player_hp_current=clamp(player_hp_current,0,player_hp_max)
 enemy_hp_current=clamp(enemy_hp_current,0,enemy_hp_max)
+
+tick_rate=clamp(tick_rate,1,room_speed)
 </string>
           </argument>
         </arguments>
