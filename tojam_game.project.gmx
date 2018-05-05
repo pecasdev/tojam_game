@@ -29,7 +29,11 @@
     </scripts>
   </scripts>
   <fonts name="fonts">
+<<<<<<< Updated upstream
     <font>fonts\fnt_healthbar</font>
+=======
+    <font>fonts\font0</font>
+>>>>>>> Stashed changes
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
