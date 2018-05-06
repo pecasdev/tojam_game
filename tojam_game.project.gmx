@@ -6,6 +6,8 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\BeginSprite</sprite>
+    <sprite>sprites\hitconnect</sprite>
     <sprites name="demo">
       <sprite>sprites\spr_game_back</sprite>
       <sprite>sprites\spr_tile</sprite>
@@ -29,6 +31,8 @@
       <sprite>sprites\spr_healthbar_chunk</sprite>
       <sprite>sprites\spr_pip_status</sprite>
     </sprites>
+    <sprite>sprites\sprite12</sprite>
+    <sprite>sprites\sprite13</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -63,6 +67,14 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_host</object>
+    <object>objects\obj_game_back</object>
+    <object>objects\obj_tile</object>
+    <object>objects\obj_begin_button</object>
+    <object>objects\obj_connect_box</object>
+    <objects name="demo">
+      <object>objects\obj_game_back</object>
+      <object>objects\obj_tile</object>
+    </objects>
     <objects name="hud">
       <object>objects\obj_hud_player</object>
       <object>objects\obj_hud_healthbar_enemy</object>
@@ -83,10 +95,10 @@
       <object>objects\obj_pip_status</object>
     </objects>
     <object>objects\obj_dmg_notify</object>
+    <object>objects\obj_title_sequence</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
-    <room>rooms\rm_title</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
