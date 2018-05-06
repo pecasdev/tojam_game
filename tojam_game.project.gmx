@@ -18,7 +18,11 @@
       <sprite>sprites\spr_hud_options</sprite>
       <sprites name="player">
         <sprite>sprites\spr_hud_player_idle</sprite>
+        <sprite>sprites\spr_hud_player_windup</sprite>
+        <sprite>sprites\spr_hud_player_attack0</sprite>
         <sprite>sprites\spr_hud_player_attack1</sprite>
+        <sprite>sprites\spr_hud_player_attack2</sprite>
+        <sprite>sprites\spr_hud_player_attack3</sprite>
       </sprites>
       <sprites name="enemy">
         <sprite>sprites\spr_hud_enemy</sprite>
@@ -37,7 +41,7 @@
     <sprite>sprites\sprite15</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\background0</background>
+    <background>background\bg_main</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -68,6 +72,8 @@
     <font>fonts\fnt_healthbar_small</font>
     <font>fonts\fnt_notify</font>
     <font>fonts\fnt_begin</font>
+    <font>fonts\fnt_stats</font>
+    <font>fonts\fnt_stats_small</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_host</object>
@@ -78,12 +84,13 @@
     </objects>
     <objects name="hud">
       <object>objects\obj_hud_player</object>
-      <object>objects\obj_hud_healthbar_enemy</object>
+      <object>objects\obj_hud_enemy</object>
       <object>objects\obj_hud_healthbar_player</object>
+      <object>objects\obj_hud_healthbar_enemy</object>
       <object>objects\obj_hud_options</object>
       <object>objects\obj_hud_button_attack</object>
       <object>objects\obj_hud_button_heal</object>
-      <object>objects\obj_hud_enemy</object>
+      <object>objects\obj_hud_stats</object>
       <object>objects\obj_hud</object>
       <objects name="notes">
         <object>objects\obj_notes</object>
@@ -99,8 +106,8 @@
     <object>objects\obj_title_sequence</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_title</room>
     <room>rooms\rm_main</room>
+    <room>rooms\rm_title</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

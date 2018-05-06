@@ -70,15 +70,15 @@ if top_alpha&gt;0
     draw_set_alpha(top_alpha)
     
     d_fnt(fnt_healthbar)
-    d_col(c_black)
+    d_col(c_white)
     draw_area(20,40,580,65,c_white,c_black,3)
     draw_area(23,43,23+554*obj_host.player_hp_current/obj_host.player_hp_max,62,c_green,c_black,0)
 
-    d_col(c_black) 
+    d_col(c_white) 
     d_align(fa_left,fa_middle)
     draw_text(20,20,obj_host.player_name)
     
-    d_col(c_black)    
+    d_col(c_white)    
     d_align(fa_right,fa_middle)
     draw_text(580,20,'('+string(obj_host.player_hp_current)+'/'+string(obj_host.player_hp_max)+')')
 
@@ -90,17 +90,17 @@ if bot_alpha&gt;0
     draw_set_alpha(bot_alpha)
     
     d_fnt(fnt_healthbar_small)
-    d_col(c_black)
+    d_col(c_white)
     d_align(fa_middle,fa_bottom)
     
-    draw_text_ext(100,260,obj_host.player_name,-1,150)
-    draw_area(100-70,275-10,100+70,275+10,c_white,c_black,3)
-    draw_area(103-70,278-10,33+134*obj_host.player_hp_current/obj_host.player_hp_max,272+10,c_green,c_black,0)
+    draw_text_ext(100,180,obj_host.player_name,-1,150)
+    draw_area(100-70,195-10,100+70,195+10,c_white,c_black,3)
+    draw_area(103-70,198-10,33+134*obj_host.player_hp_current/obj_host.player_hp_max,192+10,c_green,c_black,0)
     
     d_fnt(fnt_healthbar_small) 
-    d_col(c_black)
+    d_col(c_white)
     d_align(fa_middle,fa_middle)
-    draw_text(100,300,'('+string(obj_host.player_hp_current)+'/'+string(obj_host.player_hp_max)+')')
+    draw_text(100,220,'('+string(obj_host.player_hp_current)+'/'+string(obj_host.player_hp_max)+')')
 
     draw_set_alpha(1) 
 }

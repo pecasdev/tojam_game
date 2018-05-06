@@ -44,6 +44,12 @@ enemy_hp_current=300
 enemy_hp_max=300
 
 pip_hit=0
+pip_count=0
+hits=0
+percentage_hit=0
+combo=0
+
+move_type='attack'
 
 // Inits
 create_pattern_chunks()
@@ -55,10 +61,10 @@ instance_create(0,0,obj_hud_button_attack)
 instance_create(0,0,obj_hud_button_heal)
 instance_create(0,0,obj_hud_healthbar_player)
 instance_create(0,0,obj_hud_healthbar_enemy)
-instance_create(100,250,obj_hud_player)
+instance_create(0,0,obj_hud_player)
 instance_create(0,0,obj_hud_enemy)
+instance_create(0,0,obj_hud_stats)
 
-//instance_create(280,150,obj_game_back)
 show_debug_overlay(true)
 </string>
           </argument>
@@ -198,7 +204,8 @@ switch(state)
         obj_hud_player.target_y=350
         obj_hud_enemy.target_x=460
         obj_hud_enemy.target_y=350
-                    
+        
+        obj_hud_stats.show=false            
     }break
     
     case s.notes:
@@ -212,8 +219,11 @@ switch(state)
         obj_hud_healthbar_enemy.state=s.notes
         
         obj_hud_player.target_x=100
+        obj_hud_player.target_y=330
         obj_hud_enemy.target_x=500
+        obj_hud_enemy.target_y=330
         
+        obj_hud_stats.show=true        
     }break
 }
 </string>
@@ -250,6 +260,13 @@ if pip_hit&gt;0
     dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,dmg)
     enemy_hp_current-=dmg
     create_healthbar_chunk('enemy',dmg)
+    
+    if move_type='attack'
+    {
+        obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
+        obj_hud_player.image_index=0
+        obj_hud_player.image_speed=0.6
+    }
     pip_hit=0
 }
 
@@ -267,6 +284,8 @@ if pip_hit&lt;0
     create_healthbar_chunk('player',dmg)
     pip_hit=0
 }
+
+percentage_hit=string_format(hits/pip_count*100,4,2)
 
 </string>
           </argument>

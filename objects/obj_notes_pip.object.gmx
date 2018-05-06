@@ -48,7 +48,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if obj_notes.image_xscale=200
+            <string>if instance_exists(obj_notes) and obj_notes.image_xscale=200
 {
     if y&gt;room_height
     {
@@ -60,6 +60,8 @@
         instance_destroy()
         
         obj_host.pip_hit-=1
+        obj_host.combo=0
+        obj_host.pip_count+=1
     }
     
     vspeed+=(original_vspeed-vspeed)/80

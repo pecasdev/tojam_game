@@ -26,10 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>image_index = 0
-image_speed =  0.25
-anime = 0
-start = false
+image_speed = 0.3
 
+image_xscale=3
+image_yscale=3
 </string>
           </argument>
         </arguments>
@@ -52,43 +52,15 @@ start = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (anime == 0){
-    if (image_index &gt;= 29 or start){
-        image_speed = 0.25
-        start = false
-        image_index = 0
-    }
+            <string>event_inherited()
+
+if image_index&gt;=image_number-1 and sprite_index!=spr_hud_player_idle
+{
+    sprite_index=spr_hud_player_idle
+    image_index=0
+    image_speed=0.3
 }
-else if (anime == 1){
-    if (start){
-        image_index = 30
-        start = false
-        image_speed = 0.5
-    }
-    else if (image_index &gt;= 49){
-        anime = 0
-    }
-}
-else if (anime == 2){
-    if (start){
-        image_index = 50
-        start = false
-        image_speed = 0.5
-    }
-    else if (image_index &gt;= 66){
-        anime = 0
-    }   
-}
-else if (anime == 3){
-    if (start){
-        image_index = 67
-        start = false
-        image_speed = 0.5
-    }
-    else if (image_index &gt;= 83){
-        anime = 0
-    }
-}
+
 </string>
           </argument>
         </arguments>

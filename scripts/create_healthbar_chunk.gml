@@ -9,7 +9,7 @@ if argument0='player'
     }
     else
     {
-        chunk=instance_create(33+134*player_hp_current/player_hp_max,265,obj_healthbar_chunk)
+        chunk=instance_create(33+134*player_hp_current/player_hp_max,215,obj_healthbar_chunk)
         chunk.size=134*argument1/player_hp_max
         chunk.height=20
         chunk.colour=c_green
