@@ -6,5 +6,7 @@ enum s
     notes,
     top,
     hover,
+    enemy_death,
+    player_death,
 }
 

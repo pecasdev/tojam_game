@@ -32,9 +32,9 @@ state=s.idle
 
 // Variables
 chunk_list=ds_list_create()
-tick_rate=40//room_speed
+tick_rate=10//60/
 
-player_name='player test name'
+player_name='test'//global.player_name
 enemy_name='Enemy man guy'
 
 player_hp_current=200
@@ -50,6 +50,7 @@ percentage_hit=0
 combo=0
 
 move_type='attack'
+enemy_announce_lock=false
 
 // Inits
 create_pattern_chunks()
@@ -64,8 +65,6 @@ instance_create(0,0,obj_hud_healthbar_enemy)
 instance_create(0,0,obj_hud_player)
 instance_create(0,0,obj_hud_enemy)
 instance_create(0,0,obj_hud_stats)
-
-show_debug_overlay(true)
 </string>
           </argument>
         </arguments>
@@ -89,7 +88,7 @@ show_debug_overlay(true)
           <argument>
             <kind>1</kind>
             <string>/// Debug
-
+show_debug_message(move_type)
 if keyboard_check_pressed(vk_space)
 {
     state=s.goat
@@ -209,7 +208,24 @@ switch(state)
         obj_hud_enemy.target_x=460
         obj_hud_enemy.target_y=350
         
-        obj_hud_stats.show=false            
+        obj_hud_stats.show=false 
+        
+        if move_type='enemy_turn'
+        {
+            if !instance_exists(obj_announcer_notify) and enemy_announce_lock=false
+            {
+                announcer_notify('ENEMY TURN',c_red,c_black)
+                enemy_announce_lock=true
+            }
+
+            if !instance_exists(obj_announcer_notify) and enemy_announce_lock=true
+            {
+                state=s.notes
+                move_type='defend'
+                enemy_announce_lock=false
+                instance_create(300,300,obj_notes)
+            }
+        }            
     }break
     
     case s.notes:
@@ -241,8 +257,55 @@ switch(state)
         
         obj_hud_button_attack.target_y=650
         obj_hud_button_heal.target_y=650        
-    }
+    }break
+    
+    case s.enemy_death:
+    {
+        if obj_hud_enemy.sprite_index!=spr_hud_enemy_attack0
+        {
+            obj_hud_enemy.image_index=0
+            obj_hud_enemy.sprite_index=spr_hud_enemy_attack0//spr_enemy_dying
+            obj_hud_enemy.image_speed=0.5
+        }        
+        else if obj_hud_enemy.image_index=obj_hud_enemy.image_number-1
+        {
+            obj_hud_enemy.image_speed=0
+            obj_hud_enemy.image_alpha-=0.05
+        }
+        
+        if obj_hud_enemy.image_alpha=0
+        {
+            enemy_hp_current=enemy_hp_max*1.2
+            enemy_hp_max=enemy_hp_current
+            
+            obj_hud_enemy.sprite_index=spr_hud_enemy_idle
+            obj_hud_enemy.image_speed=0.3
+            obj_hud_enemy.x=700
+            obj_hud_enemy.image_alpha=1        
+        }
+    }break
+    
+    case s.player_death:
+    {
+        if obj_hud_player.sprite_index!=spr_hud_player_attack0//spr_hud_player_dying
+        {
+            obj_hud_player.image_index=0
+            obj_hud_player.sprite_index=spr_hud_player_attack0//spr_hud_player_dying
+            obj_hud_player.image_speed=0.5
+        }
+        else if obj_hud_player.image_index&gt;=obj_hud_player.image_number-1
+        {
+            obj_hud_player.image_speed=0
+            obj_hud_player.image_alpha-=0.05
+        }
+        
+        if obj_hud_player.image_alpha=0
+        {
+            game_end()
+        }
+    }break
 }
+        
 </string>
           </argument>
         </arguments>
@@ -264,8 +327,7 @@ switch(state)
           <argument>
             <kind>1</kind>
             <string>/// Pip hits
-
-if pip_hit&gt;0
+if pip_hit&gt;0 and move_type='attack'
 {
     dmg=0
     
@@ -278,27 +340,30 @@ if pip_hit&gt;0
     enemy_hp_current-=dmg
     create_healthbar_chunk('enemy',dmg)
     
-    if move_type='attack'
-    {
-        obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
-        obj_hud_player.image_index=0
-        obj_hud_player.image_speed=0.6
-    }
+    obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
+    obj_hud_player.image_index=0
+    obj_hud_player.image_speed=0.6
+    
     pip_hit=0
 }
 
-if pip_hit&lt;0
+if pip_hit&lt;0 and move_type='defend'
 {
     dmg=0
     
     repeat(abs(pip_hit))
     {
-        dmg+=irandom_range(0,5)
+        dmg+=irandom_range(1,5)
     }
     
     dmg_notify(obj_hud_player.x+random_range(-30,30),obj_hud_player.y-150,dmg)
     player_hp_current-=dmg
     create_healthbar_chunk('player',dmg)
+    
+    obj_hud_enemy.sprite_index=choose(spr_hud_enemy_attack0,spr_hud_enemy_attack1,spr_hud_enemy_attack2,spr_hud_enemy_attack3)
+    obj_hud_enemy.image_index=0
+    obj_hud_enemy.image_speed=0.6
+    
     pip_hit=0
 }
 
@@ -328,19 +393,23 @@ percentage_hit=real(string_format(hits/pip_count*100,4,2))
 
 if state=s.notes
 {    
-    if instance_number(obj_notes_pip)=0
+    if instance_number(obj_notes_pip)=0 and instance_exists(obj_notes) and obj_notes.close=false
     {
         if percentage_hit=100
         {
             announcer_notify('PERFECT!',c_orange,c_fuchsia)
         }
+        else if percentage_hit&gt;90
+        {
+            announcer_notify('EXCELLENT!',c_yellow,c_orange)
+        }
         else if percentage_hit&gt;80
         {
-            announcer_notify('GREAT!',c_yellow,c_orange)
+            announcer_notify('GREAT!',c_green,c_blue)
         }
         else if percentage_hit&gt;60
         {
-            announcer_notify('NICE!',c_green,c_blue)
+            announcer_notify('GOOD!',c_gray,c_blue)
         }
         else
         {
@@ -348,16 +417,33 @@ if state=s.notes
         }
         
         state=s.idle
-        obj_notes.close=true  
-    }
-    else if 0//enemy_hp_current&lt;0
-    {
-        announcer_notify('ENEMY SLAIN!',c_red,c_yellow)
         
-        state=s.idle
+        if move_type='attack'
+        {
+            move_type='enemy_turn'
+        }        
+        else if move_type='defend'
+        {
+            move_type='attack'
+        }
+        
         obj_notes.close=true  
     }
-      
+    else if enemy_hp_current=0
+    {
+        announcer_notify('ENEMY SLAIN!',c_yellow,c_red)
+        // CREATE NEW ENEMY SPAWNING
+        state=s.enemy_death
+        move_type='attack'
+        obj_notes.close=true  
+        tick_rate-=2
+    }
+    else if player_hp_current=0
+    {
+        announcer_notify('YOU HAVE DIED',c_black,c_gray)
+        state=s.player_death
+        obj_notes.close=true
+    }      
 }
 
 

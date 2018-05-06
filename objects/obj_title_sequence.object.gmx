@@ -142,7 +142,7 @@ if (logo){
 else if (fade){
     d_alpha(fadeIn)
     d_align(true,true)
-    draw_sprite(over_the_flood,-1 ,300 - sprite_get_width(over_the_flood)/2,200 - sprite_get_height(over_the_flood)/2)
+    draw_sprite(spr_over_the_flood,-1 ,300 - sprite_get_width(spr_over_the_flood)/2,200 - sprite_get_height(spr_over_the_flood)/2)
     d_alpha(first)
     draw_text(300,400,theList[| (number-1)])
 }
