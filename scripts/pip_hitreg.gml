@@ -11,6 +11,8 @@ if pip_hit!=noone
     status.image_blend=c_green
     
     instance_destroy(pip_hit)
+    
+    obj_host.pip_hit+=1
 }
 else if pip_miss!=noone
 {
@@ -20,5 +22,7 @@ else if pip_miss!=noone
     status.image_blend=c_red
     
     instance_destroy(pip_miss)
+    
+    obj_host.pip_hit-=1
 }
 

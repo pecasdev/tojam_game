@@ -58,6 +58,7 @@
   <fonts name="fonts">
     <font>fonts\fnt_healthbar</font>
     <font>fonts\fnt_healthbar_small</font>
+    <font>fonts\fnt_notify</font>
     <font>fonts\fnt_begin</font>
   </fonts>
   <objects name="objects">
@@ -81,7 +82,7 @@
       <object>objects\obj_healthbar_chunk</object>
       <object>objects\obj_pip_status</object>
     </objects>
-    <object>objects\obj_damage_notification</object>
+    <object>objects\obj_dmg_notify</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>

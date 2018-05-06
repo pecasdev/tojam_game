@@ -43,6 +43,8 @@ player_hp_max=200
 enemy_hp_current=300
 enemy_hp_max=300
 
+pip_hit=0
+
 // Inits
 create_pattern_chunks()
 create_enums()
@@ -156,32 +158,6 @@ tick_rate=clamp(tick_rate,1,room_speed)
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// DEBUG
-//draw_text(100,100,instance_number(obj_notes_pip))
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -200,12 +176,7 @@ tick_rate=clamp(tick_rate,1,room_speed)
             <kind>1</kind>
             <string>/// GUI
 switch(state)
-{
-    case s.title:
-    {
-        //title screen code
-    }break
-    
+{    
     case s.idle:
     {
         // Options Background
@@ -245,6 +216,89 @@ switch(state)
         
     }break
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Pip hits
+
+if pip_hit!=0
+{
+    show_debug_message('PIP'+string(pip_hit))
+}
+
+if pip_hit&gt;0
+{
+    dmg=0
+    
+    repeat(pip_hit)
+    {
+        dmg+=irandom_range(0,5)
+    }
+    
+    show_debug_message('DMG'+string(dmg))
+    
+    dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,dmg)
+    enemy_hp_current-=dmg
+    create_healthbar_chunk('enemy',dmg)
+    pip_hit=0
+}
+
+if pip_hit&lt;0
+{
+    dmg=0
+    
+    repeat(abs(pip_hit))
+    {
+        dmg+=irandom_range(0,5)
+    }
+    
+    dmg_notify(obj_hud_player.x+random_range(-30,30),obj_hud_player.y-150,dmg)
+    player_hp_current-=dmg
+    create_healthbar_chunk('player',dmg)
+    pip_hit=0
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// DEBUG
+//draw_text(100,100,instance_number(obj_notes_pip))
 </string>
           </argument>
         </arguments>
