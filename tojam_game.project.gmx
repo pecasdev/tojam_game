@@ -6,11 +6,13 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\BeginSprite</sprite>
+    <sprite>sprites\DefendSprite</sprite>
     <sprite>sprites\hitconnect</sprite>
     <sprites name="demo">
       <sprite>sprites\spr_game_back</sprite>
       <sprite>sprites\spr_tile</sprite>
+      <sprite>sprites\spr_tile_attack</sprite>
+      <sprite>sprites\spr_tile_defend</sprite>
     </sprites>
     <sprites name="hud">
       <sprite>sprites\spr_hud_button_attack</sprite>
@@ -26,6 +28,12 @@
       </sprites>
       <sprites name="enemy">
         <sprite>sprites\spr_hud_enemy</sprite>
+        <sprite>sprites\spr_hud_enemy_idle</sprite>
+        <sprite>sprites\spr_hud_enemy_windup</sprite>
+        <sprite>sprites\spr_hud_enemy_attack0</sprite>
+        <sprite>sprites\spr_hud_enemy_attack1</sprite>
+        <sprite>sprites\spr_hud_enemy_attack2</sprite>
+        <sprite>sprites\spr_hud_enemy_attack3</sprite>
       </sprites>
       <sprites name="notes">
         <sprite>sprites\spr_hitbar_tile</sprite>
@@ -39,6 +47,8 @@
     <sprite>sprites\sprite12</sprite>
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\AttackSprite</sprite>
+    <sprite>sprites\over_the_flood</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
@@ -81,6 +91,8 @@
     <objects name="demo">
       <object>objects\obj_game_back</object>
       <object>objects\obj_tile</object>
+      <object>objects\obj_attack_pip</object>
+      <object>objects\obj_defend_pip</object>
     </objects>
     <objects name="hud">
       <object>objects\obj_hud_player</object>
@@ -106,8 +118,8 @@
     <object>objects\obj_title_sequence</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_main</room>
     <room>rooms\rm_title</room>
+    <room>rooms\rm_main</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
