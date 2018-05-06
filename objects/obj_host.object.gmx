@@ -238,11 +238,6 @@ switch(state)
             <kind>1</kind>
             <string>/// Pip hits
 
-if pip_hit!=0
-{
-    show_debug_message('PIP'+string(pip_hit))
-}
-
 if pip_hit&gt;0
 {
     dmg=0
@@ -251,9 +246,7 @@ if pip_hit&gt;0
     {
         dmg+=irandom_range(0,5)
     }
-    
-    show_debug_message('DMG'+string(dmg))
-    
+        
     dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,dmg)
     enemy_hp_current-=dmg
     create_healthbar_chunk('enemy',dmg)

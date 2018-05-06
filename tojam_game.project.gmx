@@ -65,11 +65,11 @@
     <object>objects\obj_host</object>
     <objects name="hud">
       <object>objects\obj_hud_player</object>
-      <object>objects\obj_hud_button_heal</object>
       <object>objects\obj_hud_healthbar_enemy</object>
       <object>objects\obj_hud_healthbar_player</object>
       <object>objects\obj_hud_options</object>
       <object>objects\obj_hud_button_attack</object>
+      <object>objects\obj_hud_button_heal</object>
       <object>objects\obj_hud_enemy</object>
       <object>objects\obj_hud</object>
       <objects name="notes">
