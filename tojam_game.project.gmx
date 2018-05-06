@@ -7,12 +7,12 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="hud">
-      <sprite>sprites\spr_hud_goat</sprite>
       <sprite>sprites\spr_hud_button_attack</sprite>
       <sprite>sprites\spr_hud_button_heal</sprite>
       <sprite>sprites\spr_hud_options</sprite>
       <sprites name="player">
         <sprite>sprites\spr_hud_player_idle</sprite>
+        <sprite>sprites\spr_hud_player_death</sprite>
         <sprite>sprites\spr_hud_player_windup</sprite>
         <sprite>sprites\spr_hud_player_attack0</sprite>
         <sprite>sprites\spr_hud_player_attack1</sprite>
@@ -22,6 +22,7 @@
       <sprites name="enemy">
         <sprite>sprites\spr_hud_enemy</sprite>
         <sprite>sprites\spr_hud_enemy_idle</sprite>
+        <sprite>sprites\spr_hud_enemy_death</sprite>
         <sprite>sprites\spr_hud_enemy_windup</sprite>
         <sprite>sprites\spr_hud_enemy_attack0</sprite>
         <sprite>sprites\spr_hud_enemy_attack1</sprite>
@@ -41,8 +42,15 @@
       <sprite>sprites\spr_pip_status</sprite>
     </sprites>
     <sprite>sprites\sprite13</sprite>
+<<<<<<< HEAD
     <sprite>sprites\spr_goat_flare</sprite>
     <sprite>sprites\spr_over_the_flood</sprite>
+=======
+    <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\AttackSprite</sprite>
+    <sprite>sprites\over_the_flood</sprite>
+    <sprite>sprites\sprite33</sprite>
+>>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
@@ -66,7 +74,6 @@
       <script>scripts\create_healthbar_chunk.gml</script>
       <script>scripts\list_to_string.gml</script>
       <script>scripts\dmg_notify.gml</script>
-      <script>scripts\announcer_notify.gml</script>
     </scripts>
     <scripts name="debug">
       <script>scripts\show_pattern.gml</script>
@@ -79,7 +86,6 @@
     <font>fonts\fnt_begin</font>
     <font>fonts\fnt_stats</font>
     <font>fonts\fnt_stats_small</font>
-    <font>fonts\fnt_announcer</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_host</object>
@@ -105,7 +111,6 @@
         <object>objects\obj_notes_pip</object>
         <object>objects\obj_hitbar</object>
       </objects>
-      <object>objects\obj_hud_goat</object>
     </objects>
     <objects name="else">
       <object>objects\obj_healthbar_chunk</object>
@@ -113,11 +118,15 @@
     </objects>
     <object>objects\obj_dmg_notify</object>
     <object>objects\obj_title_sequence</object>
-    <object>objects\obj_announcer_notify</object>
+    <object>objects\obj_death</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
+<<<<<<< HEAD
     <room>rooms\rm_title</room>
+=======
+    <room>rooms\rm_deathRoom</room>
+>>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

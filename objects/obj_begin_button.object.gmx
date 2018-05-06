@@ -110,6 +110,9 @@ if (irandom(200) == 5){
             <kind>1</kind>
             <string>d_fnt(fnt_begin)
 d_align(fa_middle,fa_middle)
+if (string_length(keyboard_string) &gt;= 20){
+    keyboard_string=string_copy(keyboard_string,1,20)
+}
 if (start &lt; 1) {
     start += 0.005
     draw_set_alpha(start)
@@ -162,7 +165,7 @@ if (no){
         shake++
     }
     d_col(c_red)
-    draw_text(300,360 + (shake%5),'Enter a Name')
+    draw_text(300,370 + (shake%5),'Enter a Name')
     if (keyboard_string != ""){
         no = false
     }

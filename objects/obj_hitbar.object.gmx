@@ -38,7 +38,7 @@ for (i=0;i!=4;i+=1)
 {
     if keys[| i]=true
     {
-        draw_sprite_ext(spr_hitbar_tile,0,x+i*50,y,1,1,0,c_navy,1)
+        draw_sprite_ext(spr_hitbar_tile,0,x+i*50,y,1,1,0,c_orange,1)
     }
     else
     {

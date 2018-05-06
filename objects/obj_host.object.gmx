@@ -91,8 +91,6 @@ instance_create(0,0,obj_hud_stats)
 show_debug_message(move_type)
 if keyboard_check_pressed(vk_space)
 {
-    state=s.goat
-    /*
     if !instance_exists(obj_notes)
     {
         instance_create(300,300,obj_notes)
@@ -103,8 +101,6 @@ if keyboard_check_pressed(vk_space)
         obj_notes.close=true
         state=s.idle
     }
-    */
-    //announcer_notify('SAMPLE TEXT!',c_orange,c_fuchsia)
 }
 
 tick_rate+=(keyboard_check_pressed(ord('0'))-keyboard_check_pressed(ord('9')))*5
@@ -138,6 +134,9 @@ if keyboard_check(ord('5'))
     enemy_hp_current+=1
 }
 
+if (keyboard_check(ord('T'))){
+    room = rm_deathRoom
+}
 </string>
           </argument>
         </arguments>
@@ -245,6 +244,7 @@ switch(state)
         
         obj_hud_stats.show=true        
     }break
+<<<<<<< HEAD
     
     case s.goat:
     {
@@ -304,6 +304,8 @@ switch(state)
             game_end()
         }
     }break
+=======
+>>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
 }
         
 </string>
@@ -340,10 +342,19 @@ if pip_hit&gt;0 and move_type='attack'
     enemy_hp_current-=dmg
     create_healthbar_chunk('enemy',dmg)
     
+<<<<<<< HEAD
     obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
     obj_hud_player.image_index=0
     obj_hud_player.image_speed=0.6
     
+=======
+    if move_type='attack' // Change to defend
+    {
+        obj_hud_enemy.sprite_index=choose(spr_hud_enemy_attack0,spr_hud_enemy_attack1,spr_hud_enemy_attack2,spr_hud_enemy_attack3)
+        obj_hud_enemy.image_index=0
+        obj_hud_enemy.image_speed=0.6
+    }
+>>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
     pip_hit=0
 }
 
@@ -356,6 +367,12 @@ if pip_hit&lt;0 and move_type='defend'
         dmg+=irandom_range(1,5)
     }
     
+    if move_type='attack'
+    {
+        obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
+        obj_hud_player.image_index=0
+        obj_hud_player.image_speed=0.6
+    }
     dmg_notify(obj_hud_player.x+random_range(-30,30),obj_hud_player.y-150,dmg)
     player_hp_current-=dmg
     create_healthbar_chunk('player',dmg)
@@ -367,6 +384,7 @@ if pip_hit&lt;0 and move_type='defend'
     pip_hit=0
 }
 
+<<<<<<< HEAD
 percentage_hit=real(string_format(hits/pip_count*100,4,2))
 
 </string>
@@ -446,6 +464,9 @@ if state=s.notes
     }      
 }
 
+=======
+percentage_hit=string_format(hits/pip_count*100,4,2)
+>>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
 
 </string>
           </argument>
