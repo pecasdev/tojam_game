@@ -39,6 +39,10 @@ tranNum = 0
 transition = false
 number = 1
 col = 0
+overTheFloodFade = true
+overTheFloodNum = 0
+overTheFloodOut = 1
+overTheFloodStop = 0
 </string>
           </argument>
         </arguments>
@@ -76,8 +80,18 @@ else if(logoStop &lt; 100){
     background_colour = make_colour_hsv(0,0,100-logoStop)
     logoStop++;
 }
-else if (start &lt; 80){
+else if (overTheFloodNum &lt; 1){
     logo = false
+    overTheFloodNum+= 0.007
+}
+else if (overTheFloodStop &lt; 80){
+    overTheFloodStop++
+}
+else if(overTheFloodOut &gt;= 0){
+    overTheFloodOut -= 0.007
+}
+else if (start &lt; 80){
+    overTheFloodFade = false
     start++
 }
 else if (fadeIn &lt; 1){
@@ -109,6 +123,10 @@ else{
     }
     
 }
+if (keyboard_check(vk_space)){
+    opening =instance_create( 50 , 50 , obj_begin_button)
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
@@ -138,6 +156,15 @@ if (logo){
     d_align(true,true)
     d_alpha(logoNum) 
     draw_sprite(sprite13, -1,0,150)  
+}
+else if (overTheFloodFade){
+    if (overTheFloodStop &gt;= 79){
+        d_alpha(overTheFloodOut)
+    }
+    else{
+        d_alpha(overTheFloodNum)
+    }
+    draw_text(290,300,"Duel Mania")
 }
 else if (fade){
     d_alpha(fadeIn)
