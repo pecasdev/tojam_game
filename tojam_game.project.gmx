@@ -30,6 +30,7 @@
       <sprites name="enemy">
         <sprite>sprites\spr_hud_enemy</sprite>
         <sprite>sprites\spr_hud_enemy_idle</sprite>
+        <sprite>sprites\spr_hud_enemy_death</sprite>
         <sprite>sprites\spr_hud_enemy_windup</sprite>
         <sprite>sprites\spr_hud_enemy_attack0</sprite>
         <sprite>sprites\spr_hud_enemy_attack1</sprite>
@@ -50,6 +51,7 @@
     <sprite>sprites\sprite15</sprite>
     <sprite>sprites\AttackSprite</sprite>
     <sprite>sprites\over_the_flood</sprite>
+    <sprite>sprites\sprite33</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
@@ -117,10 +119,12 @@
     </objects>
     <object>objects\obj_dmg_notify</object>
     <object>objects\obj_title_sequence</object>
+    <object>objects\obj_death</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>
     <room>rooms\rm_main</room>
+    <room>rooms\rm_deathRoom</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

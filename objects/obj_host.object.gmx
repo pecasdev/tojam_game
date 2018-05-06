@@ -135,6 +135,9 @@ if keyboard_check(ord('5'))
     enemy_hp_current+=1
 }
 
+if (keyboard_check(ord('T'))){
+    room = rm_deathRoom
+}
 </string>
           </argument>
         </arguments>

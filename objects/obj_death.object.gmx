@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,24 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>start = 0
-fadeIn = 0
-hold = 0
-logoStop = 0
-fade = true
-logo = true
-logoNum = 0
-fadeOut = 1 
-logoWait = 0
-first = 0
-tranNum = 0
-transition = false
-number = 1
-col = 0
-overTheFloodFade = true
-overTheFloodNum = 0
-overTheFloodOut = 1
-overTheFloodStop = 0
+            <string>deathCount = 100
+youDied = true
+fadeWait = 0
+fadeNum = 0
+showAfter = false
 </string>
           </argument>
         </arguments>
@@ -65,74 +52,28 @@ overTheFloodStop = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>background_colour = make_colour_hsv(col,100,100)
-col+= 0.5
-if (logoNum &lt; 1){
-    background_colour = make_colour_hsv(0,0,120)
-    image_alpha = 0
-    logoNum += 0.006
+            <string>if (deathCount &gt;0){
+    deathCount--
+    background_colour = make_colour_hsv(deathCount, deathCount, deathCount);
 }
-else if (logoWait &lt; 100){
-    background_colour = make_colour_hsv(0,0,120)
-    logoWait ++
+else if (fadeNum &lt; 1){
+    fadeNum += 0.02
 }
-else if(logoStop &lt; 100){
-    background_colour = make_colour_hsv(0,0,100-logoStop)
-    logoStop++;
-}
-else if (overTheFloodNum &lt; 1){
-    logo = false
-    overTheFloodNum+= 0.007
-}
-else if (overTheFloodStop &lt; 80){
-    overTheFloodStop++
-}
-else if(overTheFloodOut &gt;= 0){
-    overTheFloodOut -= 0.007
-}
-else if (start &lt; 80){
-    overTheFloodFade = false
-    start++
-}
-else if (fadeIn &lt; 1){
-    fadeIn += 0.005
-}
-else if (fadeOut &lt; 50){
-    fadeOut ++ 
-}
-else if (number &lt;= 5){
-   first+= 0.008   
-   if (first &gt;= 1 &amp;&amp; number &lt; 5){
-        first = 0
-        number++
-   }
-   if (keyboard_check(vk_space)){
-        transition = true
-        number ++
-        fade = false
-    }
+else if (fadeWait &lt; 100){
+    fadeWait ++
 }
 else{
-    if (transition and tranNum &lt; 100){
-        tranNum ++
-        background_colour = make_colour_hsv(col,100 - tranNum,100)
-        if (tranNum == 100){
-            opening =instance_create( 50 , 50 , obj_begin_button)
-            instance_destroy();
-        }
+    showAfter = true
+    if (keyboard_check(vk_space)){
+        room = rm_main
     }
-    
-}
-if (keyboard_check(vk_space)){
-    opening =instance_create( 50 , 50 , obj_begin_button)
-    instance_destroy();
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -149,29 +90,12 @@ if (keyboard_check(vk_space)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>d_fnt(fnt_begin)
-theList = ds_list_create()
-ds_list_add(theList, "Bill", "Matthew", "Peter", "Sharujan", "Press Space to Continue")
-if (logo){
-    d_align(true,true)
-    d_alpha(logoNum) 
-    draw_sprite(sprite13, -1,0,150)  
-}
-else if (overTheFloodFade){
-    if (overTheFloodStop &gt;= 79){
-        d_alpha(overTheFloodOut)
-    }
-    else{
-        d_alpha(overTheFloodNum)
-    }
-    draw_text(290,300,"Duel Mania")
-}
-else if (fade){
-    d_alpha(fadeIn)
-    d_align(true,true)
-    draw_sprite(over_the_flood, 0, 300,200)
-    d_alpha(first)
-    draw_text(300,400,theList[| (number-1)])
+            <string>d_align(true,true)
+d_alpha(fadeNum)
+draw_text(300,200,'You Suck')
+if (showAfter){
+    d_alpha(1)
+    draw_text(300,400,'Press Space to Play Again')
 }
 </string>
           </argument>
