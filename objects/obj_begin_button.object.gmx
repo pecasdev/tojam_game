@@ -30,6 +30,11 @@ start2 = 0
 done = false
 no = false
 keyboard_string=''
+col = 254
+text_angle = 0
+amount = 0.125
+amount_col = 0.25
+shake = 0
 </string>
           </argument>
         </arguments>
@@ -52,15 +57,29 @@ keyboard_string=''
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(vk_enter) and done == true)
+            <string>col -= amount_col
+if (col &lt; 175){
+    amount_col = -amount_col
+}
+if (col &gt;= 255){
+    amount_col = -amount_col
+}
+background_colour = make_colour_hsv(col ,120,120)
+if (keyboard_check_pressed(vk_enter) and done == true)
 {
     if (keyboard_string == ""){
         no = true
-    }
+        shake = 0
+    }       
     else{
         global.player_name=keyboard_string
         room=rm_main
     }
+}
+if (irandom(100) == 2){
+    wow = instance_create(random_range(20, 500), 0, obj_tile)
+    wow.vspeed = 2.5
+    wow.startScreen = true
 }
 </string>
           </argument>
@@ -95,6 +114,7 @@ if (start &lt; 1) {
         start2 = 1
         done = true
         keyboard_string = ""
+        draw_set_alpha(1)
     }
 }
 else if (start2 &lt; 1){
@@ -117,12 +137,22 @@ else{
     d_col(c_white)
     draw_text(300,200,'Welcome Adventurer')
     draw_text(300 ,240,'What is Your Name')
-    d_col(c_black)
-    draw_text(300 ,280,keyboard_string)
+    d_col(c_white)
+    draw_text_transformed(300 ,280,keyboard_string,1,1,text_angle)
+    text_angle+= amount
+    if (text_angle &gt; 1.5){
+       amount = -amount
+    }
+    else if (text_angle &lt; -1.5){
+        amount  = -amount
+    }
 }
 if (no){
+    if (shake &lt; 30){
+        shake++
+    }
     d_col(c_red)
-    draw_text(300,320,'Enter a Name')
+    draw_text(300,320 + (shake%5),'Enter a Name')
     if (keyboard_string != ""){
         no = false
     }

@@ -27,7 +27,8 @@
             <kind>1</kind>
             <string>///MoveDown
 vspeed = 5
-
+startScreen = false
+num = 0
 </string>
           </argument>
         </arguments>
@@ -52,6 +53,13 @@ vspeed = 5
             <kind>1</kind>
             <string>if (y &gt; 600){
     instance_destroy(self,false)
+}
+if (startScreen){
+    num ++
+    if (num == 50){
+        effect_create_above(ef_flare,x + random_range(-5,5),y, random_range(1,3), c_white)
+        num = 0
+    }
 }
 </string>
           </argument>
