@@ -92,6 +92,8 @@ show_debug_overlay(true)
 
 if keyboard_check_pressed(vk_space)
 {
+    state=s.goat
+    /*
     if !instance_exists(obj_notes)
     {
         instance_create(300,300,obj_notes)
@@ -102,6 +104,8 @@ if keyboard_check_pressed(vk_space)
         obj_notes.close=true
         state=s.idle
     }
+    */
+    //announcer_notify('SAMPLE TEXT!',c_orange,c_fuchsia)
 }
 
 tick_rate+=(keyboard_check_pressed(ord('0'))-keyboard_check_pressed(ord('9')))*5
@@ -225,6 +229,19 @@ switch(state)
         
         obj_hud_stats.show=true        
     }break
+    
+    case s.goat:
+    {
+        if !instance_exists(obj_hud_goat)
+        {
+            instance_create(300,650,obj_hud_goat)
+        }
+        
+        obj_hud_options.target_y=650
+        
+        obj_hud_button_attack.target_y=650
+        obj_hud_button_heal.target_y=650        
+    }
 }
 </string>
           </argument>
@@ -285,7 +302,64 @@ if pip_hit&lt;0
     pip_hit=0
 }
 
-percentage_hit=string_format(hits/pip_count*100,4,2)
+percentage_hit=real(string_format(hits/pip_count*100,4,2))
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// State Switching
+
+if state=s.notes
+{    
+    if instance_number(obj_notes_pip)=0
+    {
+        if percentage_hit=100
+        {
+            announcer_notify('PERFECT!',c_orange,c_fuchsia)
+        }
+        else if percentage_hit&gt;80
+        {
+            announcer_notify('GREAT!',c_yellow,c_orange)
+        }
+        else if percentage_hit&gt;60
+        {
+            announcer_notify('NICE!',c_green,c_blue)
+        }
+        else
+        {
+            announcer_notify('CLEARED',c_white,c_yellow)
+        }
+        
+        state=s.idle
+        obj_notes.close=true  
+    }
+    else if 0//enemy_hp_current&lt;0
+    {
+        announcer_notify('ENEMY SLAIN!',c_red,c_yellow)
+        
+        state=s.idle
+        obj_notes.close=true  
+    }
+      
+}
+
 
 </string>
           </argument>

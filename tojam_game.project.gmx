@@ -13,6 +13,7 @@
       <sprite>sprites\spr_tile</sprite>
     </sprites>
     <sprites name="hud">
+      <sprite>sprites\spr_hud_goat</sprite>
       <sprite>sprites\spr_hud_button_attack</sprite>
       <sprite>sprites\spr_hud_button_heal</sprite>
       <sprite>sprites\spr_hud_options</sprite>
@@ -39,6 +40,7 @@
     <sprite>sprites\sprite12</sprite>
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\spr_goat_flare</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
@@ -62,6 +64,7 @@
       <script>scripts\create_healthbar_chunk.gml</script>
       <script>scripts\list_to_string.gml</script>
       <script>scripts\dmg_notify.gml</script>
+      <script>scripts\announcer_notify.gml</script>
     </scripts>
     <scripts name="debug">
       <script>scripts\show_pattern.gml</script>
@@ -74,14 +77,11 @@
     <font>fonts\fnt_begin</font>
     <font>fonts\fnt_stats</font>
     <font>fonts\fnt_stats_small</font>
+    <font>fonts\fnt_announcer</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_host</object>
     <object>objects\obj_begin_button</object>
-    <objects name="demo">
-      <object>objects\obj_game_back</object>
-      <object>objects\obj_tile</object>
-    </objects>
     <objects name="hud">
       <object>objects\obj_hud_player</object>
       <object>objects\obj_hud_enemy</object>
@@ -97,6 +97,7 @@
         <object>objects\obj_notes_pip</object>
         <object>objects\obj_hitbar</object>
       </objects>
+      <object>objects\obj_hud_goat</object>
     </objects>
     <objects name="else">
       <object>objects\obj_healthbar_chunk</object>
@@ -104,6 +105,7 @@
     </objects>
     <object>objects\obj_dmg_notify</object>
     <object>objects\obj_title_sequence</object>
+    <object>objects\obj_announcer_notify</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
