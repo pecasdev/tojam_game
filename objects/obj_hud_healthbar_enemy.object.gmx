@@ -90,17 +90,17 @@ if bot_alpha&gt;0
     draw_set_alpha(bot_alpha)
     
     d_fnt(fnt_healthbar_small)
-    d_col(c_black)
+    d_col(c_white)
     d_align(fa_middle,fa_bottom)
     
-    draw_text_ext(500,230,obj_host.enemy_name,-1,150)
-    draw_area(500-70,245-10,500+70,245+10,c_white,c_black,3)
-    draw_area(567,248-10,567-134*obj_host.enemy_hp_current/obj_host.enemy_hp_max,242+10,c_red,c_black,0)
+    draw_text_ext(500,180,obj_host.enemy_name,-1,150)
+    draw_area(500-70,195-10,500+70,195+10,c_white,c_black,3)
+    draw_area(567,198-10,567-134*obj_host.enemy_hp_current/obj_host.enemy_hp_max,192+10,c_red,c_black,0)
 
     d_fnt(fnt_healthbar_small)
-    d_col(c_black)
+    d_col(c_white)
     d_align(fa_middle,fa_middle)
-    draw_text(500,270,'('+string(obj_host.enemy_hp_current)+'/'+string(obj_host.enemy_hp_max)+')')
+    draw_text(500,220,'('+string(obj_host.enemy_hp_current)+'/'+string(obj_host.enemy_hp_max)+')')
 
     draw_set_alpha(1)
 }

@@ -66,24 +66,36 @@ d_alpha(alpha)
 
 
 // Bottom Left
-draw_area(0,519,199,599,c_white,c_black,2)
+d_alpha(alpha*0.6)
+draw_area(0,519,199,599,c_black,c_white,2)
+d_alpha(alpha)
 
-d_col(c_black)
 d_fnt(fnt_stats)
 d_align(fa_middle,fa_middle)
+
+d_col(c_black)
 draw_text(100,550,string(obj_host.percentage_hit)+' %')
+
+d_col(c_white)
+draw_text(98,548,string(obj_host.percentage_hit)+' %')
 
 d_fnt(fnt_stats_small)
 draw_text(100,575,'ACCURACY')
 
 
 // Bottom Right
-draw_area(399,519,599,599,c_white,c_black,2)
+d_alpha(alpha*0.6)
+draw_area(399,519,599,599,c_black,c_white,2)
+d_alpha(alpha)
 
-d_col(c_black)
 d_fnt(fnt_stats)
 d_align(fa_middle,fa_middle)
+
+d_col(c_black)
 draw_text(500,550,string(obj_host.combo)+' x')
+
+d_col(c_white)
+draw_text(498,548,string(obj_host.combo)+' x')
 
 d_fnt(fnt_stats_small)
 draw_text(500,575,'COMBO')

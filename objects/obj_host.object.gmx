@@ -254,7 +254,7 @@ if pip_hit&gt;0
     
     repeat(pip_hit)
     {
-        dmg+=irandom_range(0,5)
+        dmg+=1+round(combo/5)
     }
         
     dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,dmg)
@@ -287,30 +287,6 @@ if pip_hit&lt;0
 
 percentage_hit=string_format(hits/pip_count*100,4,2)
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// DEBUG
-//draw_text(100,100,instance_number(obj_notes_pip))
 </string>
           </argument>
         </arguments>
