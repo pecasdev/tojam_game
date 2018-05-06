@@ -6,12 +6,6 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-<<<<<<< HEAD
-    <sprite>sprites\Black</sprite>
-    <sprite>sprites\sprite1</sprite>
-    <sprite>sprites\BeginSprite</sprite>
-    <sprite>sprites\hitconnect</sprite>
-=======
     <sprites name="demo">
       <sprite>sprites\spr_game_back</sprite>
       <sprite>sprites\spr_tile</sprite>
@@ -33,8 +27,8 @@
     </sprites>
     <sprites name="else">
       <sprite>sprites\spr_healthbar_chunk</sprite>
+      <sprite>sprites\spr_pip_status</sprite>
     </sprites>
->>>>>>> master
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -45,6 +39,7 @@
     </scripts>
     <scripts name="local">
       <script>scripts\create_pattern.gml</script>
+      <script>scripts\pip_hitreg.gml</script>
     </scripts>
     <scripts name="useful">
       <script>scripts\d_col.gml</script>
@@ -52,9 +47,9 @@
       <script>scripts\d_align.gml</script>
       <script>scripts\d_alpha.gml</script>
       <script>scripts\draw_area.gml</script>
-      <script>scripts\ds_list_append_list.gml</script>
-      <script>scripts\Name_Chooser.gml</script>
       <script>scripts\create_healthbar_chunk.gml</script>
+      <script>scripts\list_to_string.gml</script>
+      <script>scripts\dmg_notify.gml</script>
     </scripts>
     <scripts name="debug">
       <script>scripts\show_pattern.gml</script>
@@ -62,28 +57,18 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_healthbar</font>
+    <font>fonts\fnt_healthbar_small</font>
     <font>fonts\fnt_begin</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_host</object>
-<<<<<<< HEAD
-    <object>objects\obj_enemy</object>
-    <object>objects\obj_game_back</object>
-    <object>objects\obj_tile</object>
-    <object>objects\obj_begin_button</object>
-    <object>objects\obj_connect_box</object>
-=======
-    <objects name="demo">
-      <object>objects\obj_game_back</object>
-      <object>objects\obj_tile</object>
-    </objects>
     <objects name="hud">
+      <object>objects\obj_hud_player</object>
+      <object>objects\obj_hud_button_heal</object>
+      <object>objects\obj_hud_healthbar_enemy</object>
+      <object>objects\obj_hud_healthbar_player</object>
       <object>objects\obj_hud_options</object>
       <object>objects\obj_hud_button_attack</object>
-      <object>objects\obj_hud_button_heal</object>
-      <object>objects\obj_hud_healthbar_player</object>
-      <object>objects\obj_hud_healthbar_enemy</object>
-      <object>objects\obj_hud_player</object>
       <object>objects\obj_hud_enemy</object>
       <object>objects\obj_hud</object>
       <objects name="notes">
@@ -94,12 +79,13 @@
     </objects>
     <objects name="else">
       <object>objects\obj_healthbar_chunk</object>
+      <object>objects\obj_pip_status</object>
     </objects>
->>>>>>> master
+    <object>objects\obj_damage_notification</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_title</room>
     <room>rooms\rm_main</room>
+    <room>rooms\rm_title</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

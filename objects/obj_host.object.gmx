@@ -34,8 +34,8 @@ state=s.idle
 chunk_list=ds_list_create()
 tick_rate=40//room_speed
 
-player_name='trap lolis are hot af'
-enemy_name='im not going to jail officer'
+player_name='player test name'
+enemy_name='Enemy man guy'
 
 player_hp_current=200
 player_hp_max=200
@@ -84,7 +84,23 @@ show_debug_overlay(true)
 
 if keyboard_check_pressed(vk_space)
 {
-    instance_create(300,300,obj_notes)
+    if !instance_exists(obj_notes)
+    {
+        instance_create(300,300,obj_notes)
+        state=s.notes
+    }
+    else
+    {
+        obj_notes.close=true
+        state=s.idle
+    }
+}
+
+tick_rate+=(keyboard_check_pressed(ord('0'))-keyboard_check_pressed(ord('9')))*5
+
+if keyboard_check_pressed(ord('9')) or keyboard_check_pressed(ord('0'))
+{
+    show_debug_message('tick rate changed to: '+string(tick_rate))
 }
 
 if keyboard_check_pressed(ord('1'))
@@ -141,6 +157,30 @@ tick_rate=clamp(tick_rate,1,room_speed)
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// DEBUG
+//draw_text(100,100,instance_number(obj_notes_pip))
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -192,7 +232,17 @@ switch(state)
     
     case s.notes:
     {
-    
+        obj_hud_options.target_y=650
+        
+        obj_hud_button_attack.target_y=650
+        obj_hud_button_heal.target_y=650
+        
+        obj_hud_healthbar_player.state=s.notes
+        obj_hud_healthbar_enemy.state=s.notes
+        
+        obj_hud_player.target_x=100
+        obj_hud_enemy.target_x=500
+        
     }break
 }
 </string>

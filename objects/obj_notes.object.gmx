@@ -32,8 +32,26 @@ tick_rate=obj_host.tick_rate
 counter=0
 seek=0
 
-open=false
+image_alpha=0
+
+close=false
 image_xscale=0
+
+while seek!=string_length(pattern)
+{
+    for (i=0;i!=4;i+=1)
+    {
+        if string_char_at(pattern,seek+i+1)='1'
+        {
+            pip=instance_create(225+50*i,200-counter*room_speed/tick_rate,obj_notes_pip)
+            pip.vspeed=room_speed/tick_rate
+            pip.original_vspeed=pip.vspeed
+        }
+    }
+    
+    seek+=4
+    counter+=tick_rate
+}
 </string>
           </argument>
         </arguments>
@@ -57,33 +75,40 @@ image_xscale=0
           <argument>
             <kind>1</kind>
             <string>/// Pattern Sequencer
-if image_xscale!=200
+
+if !close
 {
-    image_xscale+=4
-    x-=2
-    
-    if image_xscale=200
+    if image_xscale!=200
     {
-        instance_create(x,500,obj_hitbar)
+        image_xscale+=8
+        x-=4
+        image_alpha+=0.04
+        
+        if image_xscale=200
+        {
+            instance_create(x,520,obj_hitbar)
+        }
     }
 }
 else
 {
-    if counter mod tick_rate = 0
+    if image_xscale!=0
     {
-        for (i=0;i!=4;i+=1)
+        if image_xscale=200
         {
-            if pattern[| seek+i]=1
-            {
-                pip=instance_create(225+50*i,-50,obj_notes_pip)
-                pip.vspeed=room_speed/tick_rate
-            }
-            //show_debug_message('hai!')
+            instance_destroy(obj_hitbar)
+            instance_destroy(obj_notes_pip)
         }
-        seek+=4
+        
+        image_xscale-=8
+        image_alpha-=0.04
+        x+=4
     }
-}    
-counter+=1
+    else
+    {
+        instance_destroy()
+    }
+}
 </string>
           </argument>
         </arguments>

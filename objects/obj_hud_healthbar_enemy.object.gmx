@@ -8,6 +8,32 @@
   <parentName>obj_hud</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited()
+top_alpha=1
+bot_alpha=0
+state=s.top
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -27,6 +53,22 @@
             <kind>1</kind>
             <string>if state=s.top
 {
+    top_alpha+=0.04
+    bot_alpha-=0.04
+}
+else
+{
+    top_alpha-=0.04
+    bot_alpha+=0.04
+}
+
+bot_alpha=clamp(bot_alpha,0,1)
+top_alpha=clamp(top_alpha,0,1)
+
+if top_alpha&gt;0
+{
+    draw_set_alpha(top_alpha)
+    
     d_fnt(fnt_healthbar)
     d_col(c_black)
     draw_area(20,75,580,100,c_white,c_black,3)
@@ -39,10 +81,28 @@
     d_col(c_black)    
     d_align(fa_left,fa_middle)
     draw_text(20,120,'('+string(obj_host.enemy_hp_current)+'/'+string(obj_host.enemy_hp_max)+')')
+
+    draw_set_alpha(1)
 }
-else
+
+if bot_alpha&gt;0
 {
-    // above player mode
+    draw_set_alpha(bot_alpha)
+    
+    d_fnt(fnt_healthbar_small)
+    d_col(c_black)
+    d_align(fa_middle,fa_bottom)
+    
+    draw_text_ext(500,260,obj_host.enemy_name,-1,150)
+    draw_area(500-70,275-10,500+70,275+10,c_white,c_black,3)
+    draw_area(567,278-10,567-134*obj_host.enemy_hp_current/obj_host.enemy_hp_max,272+10,c_red,c_black,0)
+    
+    d_fnt(fnt_healthbar_small)
+    d_col(c_black)
+    d_align(fa_middle,fa_middle)
+    draw_text(500,300,'('+string(obj_host.enemy_hp_current)+'/'+string(obj_host.enemy_hp_max)+')')
+
+    draw_set_alpha(1)
 }
 </string>
           </argument>

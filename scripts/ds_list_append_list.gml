@@ -1,9 +1,6 @@
-old=argument0
-new=argument1
+parent=argument0
+add=argument1
 
-for (i=0;i!=ds_list_size(argument1);i+=1)
-{
-    ds_list_add(old,new[| i])
-}
+ds_list_add(parent,add)
 
-return old
+return parent
