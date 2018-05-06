@@ -9,7 +9,9 @@ if pip_hit!=noone
     status.image_blend=c_green
     
     instance_destroy(pip_hit)
-    
+    show_debug_message(argument0)
+    obj_hud_player.anime = argument0 + 1
+    obj_hud_player.start = true
     obj_host.pip_hit+=1
 }
 else if pip_miss!=noone

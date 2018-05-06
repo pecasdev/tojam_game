@@ -112,7 +112,9 @@ ds_list_add(theList, "Bill", "Matthew", "Peter", "Sharujan")
 if (fade){
     d_alpha(fadeIn)
     d_align(true,true)
-    draw_text(300,300,"PlaceHolder")
+    draw_text(300,200,"PlaceHolder")
+    d_alpha(first)
+    draw_text(300,400,theList[| (number-1)])
 }
 else if (logo){
     d_align(true,true)

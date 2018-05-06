@@ -55,7 +55,7 @@ instance_create(0,0,obj_hud_button_attack)
 instance_create(0,0,obj_hud_button_heal)
 instance_create(0,0,obj_hud_healthbar_player)
 instance_create(0,0,obj_hud_healthbar_enemy)
-instance_create(0,0,obj_hud_player)
+instance_create(100,250,obj_hud_player)
 instance_create(0,0,obj_hud_enemy)
 
 //instance_create(280,150,obj_game_back)

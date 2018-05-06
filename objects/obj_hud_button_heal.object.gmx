@@ -29,13 +29,12 @@
 
 if position_meeting(mouse_x,mouse_y,id)
 {
-    image_xscale=1.1
-    image_yscale=1.1
+    image_speed = 0.25
 }
 else
 {
-    image_xscale=1
-    image_yscale=1
+    image_index = 0
+    index_speed = 0 
 }
 </string>
           </argument>
