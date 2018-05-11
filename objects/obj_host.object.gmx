@@ -29,6 +29,7 @@
 
 // State
 state=s.idle
+window_set_caption('Duelmania')
 
 // Variables
 chunk_list=ds_list_create()
@@ -75,76 +76,6 @@ instance_create(0,0,obj_hud_stats)
       </action>
     </event>
     <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Debug
-if pip_hit!=0
-{
-    show_debug_message(pip_hit)
-}
-
-if keyboard_check_pressed(vk_space)
-{
-    if !instance_exists(obj_notes)
-    {
-        instance_create(300,300,obj_notes)
-        state=s.notes
-    }
-    else
-    {
-        obj_notes.close=true
-        state=s.idle
-    }
-}
-tick_rate+=(keyboard_check_pressed(ord('0'))-keyboard_check_pressed(ord('9')))*5
-
-if keyboard_check_pressed(ord('9')) or keyboard_check_pressed(ord('0'))
-{
-    show_debug_message('tick rate changed to: '+string(tick_rate))
-}
-
-if keyboard_check_pressed(ord('1'))
-{
-    dmg=irandom_range(2,20)
-    player_hp_current-=dmg
-    create_healthbar_chunk('player',dmg)
-}
-
-if keyboard_check(ord('2'))
-{
-    player_hp_current+=1
-}
-
-if keyboard_check_pressed(ord('4'))
-{
-    dmg=irandom_range(2,20)
-    enemy_hp_current-=dmg
-    create_healthbar_chunk('enemy',dmg)
-}
-
-if keyboard_check(ord('5'))
-{
-    enemy_hp_current+=1
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
