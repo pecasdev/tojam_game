@@ -64,7 +64,9 @@ if position_meeting(mouse_x,mouse_y,id)
     }
     if (mouse_check_button_released(mb_left) and hold){
         hold = false
-        show_message("Weeb")
+        
+        instance_create(300,300,obj_notes)
+        obj_host.state=s.notes   
     }
     
 }

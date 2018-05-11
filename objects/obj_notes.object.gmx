@@ -32,10 +32,6 @@ tick_rate=obj_host.tick_rate
 counter=0
 seek=0
 
-obj_host.combo=0
-obj_host.pip_count=0
-obj_host.hits=0
-
 image_alpha=0
 
 close=false

@@ -103,7 +103,8 @@ if y&gt;700
     instance_destroy()
     announcer_notify('HEALED!',c_lime,c_green)
     obj_host.state=s.idle
-    obj_host.tick_rate-=2
+    obj_host.defend_tick_rate-=8
+    obj_host.attack_tick_rate-=8
 }
 </string>
           </argument>

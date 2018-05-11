@@ -54,7 +54,7 @@ alpha=1
 d_fnt(fnt_notify)
 d_col(c_red)
 d_alpha(alpha)
-draw_text(x,y,'-'+string(value))
+draw_text(x,y,string(value))
 d_alpha(1)
 y-=5
 alpha-=0.01

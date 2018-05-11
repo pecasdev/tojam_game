@@ -32,9 +32,12 @@ state=s.idle
 
 // Variables
 chunk_list=ds_list_create()
-tick_rate=10//60/
 
-player_name='test'//global.player_name
+tick_rate=80
+attack_tick_rate=80
+defend_tick_rate=80
+
+player_name=global.player_name
 enemy_name='Enemy man guy'
 
 player_hp_current=200
@@ -51,6 +54,7 @@ combo=0
 
 move_type='attack'
 enemy_announce_lock=false
+current_round=1
 
 // Inits
 create_pattern_chunks()
@@ -88,7 +92,11 @@ instance_create(0,0,obj_hud_stats)
           <argument>
             <kind>1</kind>
             <string>/// Debug
-show_debug_message(move_type)
+if pip_hit!=0
+{
+    show_debug_message(pip_hit)
+}
+
 if keyboard_check_pressed(vk_space)
 {
     if !instance_exists(obj_notes)
@@ -102,7 +110,6 @@ if keyboard_check_pressed(vk_space)
         state=s.idle
     }
 }
-
 tick_rate+=(keyboard_check_pressed(ord('0'))-keyboard_check_pressed(ord('9')))*5
 
 if keyboard_check_pressed(ord('9')) or keyboard_check_pressed(ord('0'))
@@ -134,9 +141,6 @@ if keyboard_check(ord('5'))
     enemy_hp_current+=1
 }
 
-if (keyboard_check(ord('T'))){
-    room = rm_deathRoom
-}
 </string>
           </argument>
         </arguments>
@@ -160,7 +164,7 @@ if (keyboard_check(ord('T'))){
             <string>/// Clamping
 player_hp_current=clamp(player_hp_current,0,player_hp_max)
 enemy_hp_current=clamp(enemy_hp_current,0,enemy_hp_max)
-
+combo=clamp(combo,0,50)
 tick_rate=clamp(tick_rate,1,room_speed)
 </string>
           </argument>
@@ -244,7 +248,6 @@ switch(state)
         
         obj_hud_stats.show=true        
     }break
-<<<<<<< HEAD
     
     case s.goat:
     {
@@ -261,51 +264,46 @@ switch(state)
     
     case s.enemy_death:
     {
-        if obj_hud_enemy.sprite_index!=spr_hud_enemy_attack0
+        with (obj_hud_enemy)
         {
-            obj_hud_enemy.image_index=0
-            obj_hud_enemy.sprite_index=spr_hud_enemy_attack0//spr_enemy_dying
-            obj_hud_enemy.image_speed=0.5
-        }        
-        else if obj_hud_enemy.image_index=obj_hud_enemy.image_number-1
-        {
-            obj_hud_enemy.image_speed=0
-            obj_hud_enemy.image_alpha-=0.05
+            if sprite_index=spr_hud_enemy_death and image_index&gt;=image_number-1
+            {
+                image_speed=0
+                image_index=image_number-1
+                image_alpha-=0.02
+            }
         }
         
-        if obj_hud_enemy.image_alpha=0
+        if !instance_exists(obj_hud_enemy)
         {
-            enemy_hp_current=enemy_hp_max*1.2
+            current_round+=1
+            announcer_notify('Round '+string(current_round),c_orange,c_lime)
+            instance_create(650,350,obj_hud_enemy)
+            
+            enemy_hp_current=floor(enemy_hp_max*1.2)
             enemy_hp_max=enemy_hp_current
             
-            obj_hud_enemy.sprite_index=spr_hud_enemy_idle
-            obj_hud_enemy.image_speed=0.3
-            obj_hud_enemy.x=700
-            obj_hud_enemy.image_alpha=1        
+            state=s.idle            
         }
     }break
     
     case s.player_death:
     {
-        if obj_hud_player.sprite_index!=spr_hud_player_attack0//spr_hud_player_dying
+        with (obj_hud_player)
         {
-            obj_hud_player.image_index=0
-            obj_hud_player.sprite_index=spr_hud_player_attack0//spr_hud_player_dying
-            obj_hud_player.image_speed=0.5
-        }
-        else if obj_hud_player.image_index&gt;=obj_hud_player.image_number-1
-        {
-            obj_hud_player.image_speed=0
-            obj_hud_player.image_alpha-=0.05
+            if sprite_index=spr_hud_player_death and image_index&gt;=image_number-1
+            {
+                image_speed=0
+                image_index=image_number-1
+                image_alpha-=0.02
+            }
         }
         
-        if obj_hud_player.image_alpha=0
+        if !instance_exists(obj_hud_player)
         {
-            game_end()
+            room=rm_end
         }
     }break
-=======
->>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
 }
         
 </string>
@@ -329,62 +327,69 @@ switch(state)
           <argument>
             <kind>1</kind>
             <string>/// Pip hits
-if pip_hit&gt;0 and move_type='attack'
+if pip_hit&gt;0
 {
-    dmg=0
-    
-    repeat(pip_hit)
+    if move_type='attack'
     {
-        dmg+=1+round(combo/5)
-    }
+        dmg=0
         
-    dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,dmg)
-    enemy_hp_current-=dmg
-    create_healthbar_chunk('enemy',dmg)
+        repeat(pip_hit)
+        {
+            dmg+=1+round(combo/5)
+        }
+            
+        dmg_notify(obj_hud_enemy.x+random_range(-30,30),obj_hud_enemy.y-150,'-'+string(dmg))
+        enemy_hp_current-=dmg
+        create_healthbar_chunk('enemy',dmg)
+        
+        obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
+        obj_hud_player.image_index=0
+        obj_hud_player.image_speed=0.6    
     
-<<<<<<< HEAD
-    obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
-    obj_hud_player.image_index=0
-    obj_hud_player.image_speed=0.6
-    
-=======
-    if move_type='attack' // Change to defend
-    {
-        obj_hud_enemy.sprite_index=choose(spr_hud_enemy_attack0,spr_hud_enemy_attack1,spr_hud_enemy_attack2,spr_hud_enemy_attack3)
+        obj_hud_enemy.sprite_index=spr_hud_enemy_hurt
         obj_hud_enemy.image_index=0
         obj_hud_enemy.image_speed=0.6
     }
->>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
-    pip_hit=0
-}
-
-if pip_hit&lt;0 and move_type='defend'
-{
-    dmg=0
-    
-    repeat(abs(pip_hit))
+    else if move_type='defend'
     {
-        dmg+=irandom_range(1,5)
-    }
-    
-    if move_type='attack'
-    {
-        obj_hud_player.sprite_index=choose(spr_hud_player_attack0,spr_hud_player_attack1,spr_hud_player_attack2,spr_hud_player_attack3)
+        obj_hud_player.sprite_index=spr_hud_player_block
         obj_hud_player.image_index=0
         obj_hud_player.image_speed=0.6
     }
-    dmg_notify(obj_hud_player.x+random_range(-30,30),obj_hud_player.y-150,dmg)
-    player_hp_current-=dmg
-    create_healthbar_chunk('player',dmg)
-    
-    obj_hud_enemy.sprite_index=choose(spr_hud_enemy_attack0,spr_hud_enemy_attack1,spr_hud_enemy_attack2,spr_hud_enemy_attack3)
-    obj_hud_enemy.image_index=0
-    obj_hud_enemy.image_speed=0.6
-    
-    pip_hit=0
 }
 
-<<<<<<< HEAD
+if pip_hit&lt;0
+{ 
+    if move_type='defend'
+    {
+        dmg=0
+        
+        repeat(abs(pip_hit))
+        {
+            dmg+=irandom_range(1,5)
+        }
+        
+        dmg_notify(obj_hud_player.x+random_range(-30,30),obj_hud_player.y-150,'-'+string(dmg))
+        player_hp_current-=dmg
+        create_healthbar_chunk('player',dmg)
+        
+        obj_hud_enemy.sprite_index=choose(spr_hud_enemy_attack0,spr_hud_enemy_attack1,spr_hud_enemy_attack2,spr_hud_enemy_attack3)
+        obj_hud_enemy.image_index=0
+        obj_hud_enemy.image_speed=0.6    
+        
+        obj_hud_player.sprite_index=spr_hud_player_hurt
+        obj_hud_player.image_index=0
+        obj_hud_player.image_speed=0.6
+    }
+    else if move_type='attack'
+    {
+        obj_hud_enemy.sprite_index=spr_hud_enemy_block
+        obj_hud_enemy.image_index=0
+        obj_hud_enemy.image_speed=0.6
+    }        
+}
+
+pip_hit=0
 percentage_hit=real(string_format(hits/pip_count*100,4,2))
 
 </string>
@@ -410,8 +415,47 @@ percentage_hit=real(string_format(hits/pip_count*100,4,2))
             <string>/// State Switching
 
 if state=s.notes
-{    
-    if instance_number(obj_notes_pip)=0 and instance_exists(obj_notes) and obj_notes.close=false
+{   
+    if enemy_hp_current=0
+    {
+        announcer_notify('ENEMY SLAIN!',c_yellow,c_red)
+        state=s.enemy_death
+        
+        with(obj_hud_enemy)
+        {
+            sprite_index=spr_hud_enemy_death
+            image_index=0
+            image_speed=0.1
+            death=true
+        }
+        
+        obj_notes.close=true 
+        pip_count=0
+        hits=0
+        pip_hit=0
+        attack_tick_rate-=16
+        defend_tick_rate=min(attack_tick_rate,defend_tick_rate)+10
+    }
+    else if player_hp_current=0
+    {
+        announcer_notify('YOU HAVE DIED',c_black,c_gray)
+        state=s.player_death
+        
+        with(obj_hud_player)
+        {
+            sprite_index=spr_hud_player_death
+            image_index=0
+            image_speed=0.1
+            death=true
+        }
+        
+        obj_notes.close=true
+        combo=0
+        pip_count=0
+        hits=0
+        pip_hit=0
+    }          
+    else if instance_number(obj_notes_pip)=0 and instance_exists(obj_notes) and obj_notes.close=false
     {
         if percentage_hit=100
         {
@@ -432,6 +476,7 @@ if state=s.notes
         else
         {
             announcer_notify('CLEARED',c_white,c_yellow)
+            defend_tick_rate+=7
         }
         
         state=s.idle
@@ -439,34 +484,25 @@ if state=s.notes
         if move_type='attack'
         {
             move_type='enemy_turn'
+            defend_tick_rate-=10
+            attack_tick_rate=defend_tick_rate
         }        
         else if move_type='defend'
         {
             move_type='attack'
+            combo=0
         }
         
-        obj_notes.close=true  
+        obj_notes.close=true 
+        pip_count=0
+        hits=0
+        pip_hit=0         
     }
-    else if enemy_hp_current=0
-    {
-        announcer_notify('ENEMY SLAIN!',c_yellow,c_red)
-        // CREATE NEW ENEMY SPAWNING
-        state=s.enemy_death
-        move_type='attack'
-        obj_notes.close=true  
-        tick_rate-=2
-    }
-    else if player_hp_current=0
-    {
-        announcer_notify('YOU HAVE DIED',c_black,c_gray)
-        state=s.player_death
-        obj_notes.close=true
-    }      
 }
 
-=======
 percentage_hit=string_format(hits/pip_count*100,4,2)
->>>>>>> 627b58d22b7747b73b1402f9ef378733c2854907
+tick_rate=min(attack_tick_rate,defend_tick_rate)
+show_debug_message('current: '+string(tick_rate)+' - attack: '+string(attack_tick_rate)+' - defend: '+string(defend_tick_rate))
 
 </string>
           </argument>

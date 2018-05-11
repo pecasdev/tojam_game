@@ -92,13 +92,14 @@ d_fnt(fnt_stats)
 d_align(fa_middle,fa_middle)
 
 d_col(c_black)
-draw_text(500,550,string(obj_host.combo)+' x')
+draw_text_transformed(500,550-obj_host.combo/7,string(obj_host.combo)+' x',1+obj_host.combo/50,1+obj_host.combo/50,0)
+
+d_col(merge_colour(c_white,c_olive,obj_host.combo/50))
+draw_text_transformed(498,548-obj_host.combo/7,string(obj_host.combo)+' x',1+obj_host.combo/50,1+obj_host.combo/50,0)
 
 d_col(c_white)
-draw_text(498,548,string(obj_host.combo)+' x')
-
 d_fnt(fnt_stats_small)
-draw_text(500,575,'COMBO')
+draw_text(500,575+obj_host.combo/7,'COMBO')
 
 d_alpha(1)
 </string>

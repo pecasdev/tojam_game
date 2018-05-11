@@ -70,15 +70,15 @@ if top_alpha&gt;0
     draw_set_alpha(top_alpha)
     
     d_fnt(fnt_healthbar)
-    d_col(c_black)
+    d_col(c_white)
     draw_area(20,75,580,100,c_white,c_black,3)
     draw_area(577,78,577-554*obj_host.enemy_hp_current/obj_host.enemy_hp_max,97,c_red,c_black,0)
     
-    d_col(c_black) 
+    d_col(c_white) 
     d_align(fa_right,fa_middle)
     draw_text(580,120,obj_host.enemy_name)
     
-    d_col(c_black)    
+    d_col(c_white)    
     d_align(fa_left,fa_middle)
     draw_text(20,120,'('+string(obj_host.enemy_hp_current)+'/'+string(obj_host.enemy_hp_max)+')')
 
